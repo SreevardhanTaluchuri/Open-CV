@@ -39,23 +39,3 @@ def stackingImages(scale , imgArray):
 
 
 
-kernel = np.zeros((5,5) , np.uint8)
-
-path = "../Resources/lena.png"
-img = cv2.imread(path)
-imgGrey = cv2.cvtColor(img , cv2.COLOR_BGR2GRAY)
-imgBlur = cv2.GaussianBlur(imgGrey , (7,7),0)
-imgCanny = cv2.Canny(imgBlur , 100,200)
-imgDilation = cv2.dilate(imgCanny , kernel , iterations=2)
-imgEroded = cv2.erode(imgDilation , kernel , iterations=2 )
-StackedImages = stackingImages(0.8 , [[img , imgBlur , imgCanny] , [imgEroded , imgGrey , imgDilation]])
-cv2.imshow("Image...",StackedImages)
-
-# cv2.imshow("Image...",img)
-# cv2.imshow("Image Grey...",imgGrey)
-# cv2.imshow("Image Blur" , imgBlur)
-# cv2.imshow("Image Canny" , imgCanny)
-# cv2.imshow("Image Dilation...",imgDilation)
-# cv2.imshow("Image Erroded...",imgEroded)
-
-cv2.waitKey(0)
